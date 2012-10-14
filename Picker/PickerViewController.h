@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iCarousel.h"
 
-@interface PickerViewController : UIViewController
+@interface PickerViewController : UIViewController <iCarouselDataSource, iCarouselDelegate>
+
+@property (weak, nonatomic) IBOutlet iCarousel *pickerCarousel;
+
+@property (weak, nonatomic) IBOutlet UILabel *pickerLabel;
 
 @end
