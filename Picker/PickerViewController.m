@@ -115,7 +115,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    pickerCarousel.type = iCarouselTypeCoverFlow2;
+    pickerCarousel.type = iCarouselTypeWheel;
 }
 
 - (void)viewDidUnload
@@ -136,7 +136,23 @@
 
 - (UIView*)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-    view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[[pickerItems objectAtIndex:index] objectForKey:@"image"]]];
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
+        FXImageView *imageView = [[[FXImageView alloc] initWithFrame:CGRectMake(0, 0,175.0f, 175.0f)] autorelease];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.asynchronous = YES;
+        imageView.reflectionScale = 0.5f;
+        imageView.reflectionAlpha = 0.25f;
+        imageView.reflectionGap = 10.0f;
+        imageView.shadowOffset = CGSizeMake(0.0f, 2.0f);
+        imageView.shadowBlur = 5.0f;
+        imageView.cornerRadius = 10.0f;
+        view = imageView;
+    }
+    //show placeholder
+    //((FXImageView *)view).processedImage = [UIImage imageNamed:@"placeholder.png"];
+    ((FXImageView *)view).image = [UIImage imageNamed:[[pickerItems objectAtIndex:index] objectForKey:@"image"]];
     return view;
 }
 
@@ -150,30 +166,33 @@
     return [self.pickerItems count];
 }
 
-- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
-{
-    return 0;
-}
-
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
 {
     switch (option)
     {
+        case iCarouselOptionWrap:
+            return YES;
         case iCarouselOptionFadeMin:
             return -0.2;
         case iCarouselOptionFadeMax:
             return 0.2;
         case iCarouselOptionFadeRange:
             return 2.0;
+        case iCarouselOptionSpacing:
+            return value * 1.05f;
+        case iCarouselOptionVisibleItems:
+            return 20;
+        case iCarouselOptionShowBackfaces:
+            return YES;
         default:
             return value;
     }
 }
 
+
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
     pickerLabel.text = [NSString stringWithFormat:@"Testing! You have selected .\n%@", [[pickerItems objectAtIndex:carousel.currentItemIndex] objectForKey:@"title"] ];
 }
-
 
 @end

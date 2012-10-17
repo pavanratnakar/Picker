@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iCarousel.h"
+#import "FXImageView.h"
 
 @interface PickerViewController : UIViewController <iCarouselDataSource, iCarouselDelegate>
 

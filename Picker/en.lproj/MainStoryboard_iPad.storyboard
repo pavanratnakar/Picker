@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="OG2-1P-zrg" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="139" width="768" height="783"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="922"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
